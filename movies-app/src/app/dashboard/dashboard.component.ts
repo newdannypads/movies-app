@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.sass']
+  styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
 
@@ -18,7 +18,7 @@ export class DashboardComponent implements OnInit {
     },
     {
       name: "The lord of the rings"
-    }    
+    }
   ]
   ngOnInit(): void {
   }

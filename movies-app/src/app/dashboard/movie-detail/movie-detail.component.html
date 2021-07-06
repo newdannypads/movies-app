@@ -1,0 +1,65 @@
+<div>
+  <h1> {{ movieTmdb.title }} - ( {{ movieOmdb.Year }} ) </h1>
+
+  <div class="movie-container">
+    <img [src]="movieOmdb.Poster" alt="">
+  <ng-image-slider #nav [images]="videosUrl" [infinite]="true" [autoSlide]="1" [animationSpeed]="2"
+		[imageSize]="{width: '50%', height: 250}" slideImage="1">
+  </ng-image-slider>
+
+  </div>
+<div>
+  <mat-accordion class="example-headers-align">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Synopsis
+        </mat-panel-title>
+        <mat-panel-description>
+          <!-- <mat-icon>summarize</mat-icon> -->
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      {{ movieTmdb.overview }}
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Director
+        </mat-panel-title>
+        <mat-panel-description>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      {{  movieOmdb.Director }}
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Genres
+        </mat-panel-title>
+        <mat-panel-description>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-chip-list aria-label="Fish selection">
+        <mat-chip *ngFor="let genre of genres"> {{ genre }}</mat-chip>
+      </mat-chip-list>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Awards
+        </mat-panel-title>
+        <mat-panel-description>
+          <div class="align-oscars">
+            <img class="oscars" src="assets/icons/oscar.svg" alt=""  *ngFor="let oscar of oscars">
+          </div>
+          <!-- <mat-icon>date_range</mat-icon> -->
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <h2>{{ awards }} </h2>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+
+
+
+</div>
