@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ThumbnailComponent } from './dashboard/thumbnail/thumbnail.component';
 import { MovieDetailComponent } from './dashboard/movie-detail/movie-detail.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { MovieDetailComponent } from './dashboard/movie-detail/movie-detail.comp
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     AppMaterialDependenciesModule,
     NgImageSliderModule
   ],

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TmdbService } from './tmdb.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,20 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private tmdbService: TmdbService) { }
 
-  movies = [
-    {
-      name: "Forrest Gump"
-    },
-    {
-      name: "Up"
-    },
-    {
-      name: "The lord of the rings"
-    }
-  ]
+  movies = [];
+
   ngOnInit(): void {
+    this.getTrendingMovies();
   }
 
+  getTrendingMovies(){
+    this.tmdbService.getTmdbTrendingMovies().subscribe((data) => {
+      this.movies = data.results;
+    });
+  }
 }

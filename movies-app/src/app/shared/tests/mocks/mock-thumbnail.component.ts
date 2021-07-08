@@ -9,5 +9,5 @@ import { ThumbnailComponent } from '../../../dashboard/thumbnail/thumbnail.compo
   ],
 })
 export class MockThumbnailComponent {
-  @Input() name;
+  @Input() movie;
 }
