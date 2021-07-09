@@ -19,4 +19,9 @@ export class TmdbService {
     const url: string = `${ environment.tmdbUrl }trending/all/day?api_key=${ environment.tmbdApiKey }`;
     return this.httpClient.get(url);
   }
+
+  getTmdbGenreMovies(){
+    const url: string = `${ environment.tmdbUrl }genre/movie/list?api_key=${ environment.tmbdApiKey }`;
+    return this.httpClient.get(url);
+  }
 }

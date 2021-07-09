@@ -6,6 +6,7 @@ import { Type } from '@angular/core';
 import { TmdbService } from './tmdb.service';
 import * as movie from '../shared/tests/data/movie-data.testdata.json';
 import * as moviesTrending from '../shared/tests/data/movie-trending-data.testdata.json';
+import * as moviesGenres from '../shared/tests/data/movie-genres-data.testdata.json';
 
 describe('TmdbService', () => {
   let service: TmdbService;
@@ -50,6 +51,19 @@ describe('TmdbService', () => {
     const request = httpTestingController.expectOne(url);
     expect(request.request.method).toEqual('GET');
     request.flush(moviesTrending.moviesTrendingData);
+  });
+
+  it('should call all movies genres in tmdb', () => {
+
+    const url: string = `${ environment.tmdbUrl }genre/movie/list?api_key=${ environment.tmbdApiKey }`;
+
+    service.getTmdbGenreMovies().subscribe( (data) => {
+      expect(data).toEqual(moviesGenres.moviesGenresData);
+    });
+
+    const request = httpTestingController.expectOne(url);
+    expect(request.request.method).toEqual('GET');
+    request.flush(moviesGenres.moviesGenresData);
   });
 
 });

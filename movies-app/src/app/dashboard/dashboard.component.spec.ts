@@ -2,16 +2,14 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { of } from 'rxjs';
 
 import { DashboardComponent } from './dashboard.component';
-import { MockThumbnailComponent } from '../shared/tests/mocks/mock-thumbnail.component';
 import { TmdbService } from './tmdb.service';
 import * as moviesTrending from '../shared/tests/data/movie-trending-data.testdata.json';
+import { MockComponent } from '../../../setup-jest';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
   let tmdbService: TmdbService;
-
-
 
   beforeEach(
     waitForAsync(() => {
@@ -20,7 +18,7 @@ describe('DashboardComponent', () => {
       };
 
       TestBed.configureTestingModule({
-        declarations: [DashboardComponent, MockThumbnailComponent],
+        declarations: [DashboardComponent, MockComponent('app-thumbnail', { inputs: [ 'movie' ] })],
         providers: [{ provide: TmdbService, useValue: mockTmdbService }],
       }).compileComponents();
     })
