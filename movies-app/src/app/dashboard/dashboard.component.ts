@@ -11,14 +11,22 @@ export class DashboardComponent implements OnInit {
   constructor(private tmdbService: TmdbService) { }
 
   movies = [];
+  genres = []
 
   ngOnInit(): void {
     this.getTrendingMovies();
+    this.getMoviesGenre();
   }
 
   getTrendingMovies(){
     this.tmdbService.getTmdbTrendingMovies().subscribe((data) => {
       this.movies = data.results;
     });
+  }
+
+  getMoviesGenre(){
+    this.tmdbService.getTmdbGenreMovies().subscribe((data) => {
+      this.genres = data.genres;
+    })
   }
 }

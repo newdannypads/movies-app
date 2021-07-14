@@ -1,2 +1,12 @@
 <h3>Movies</h3>
-<app-thumbnail *ngFor="let movie of movies" [movie]="movie"></app-thumbnail>
+<mat-form-field appearance="fill">
+    <mat-label>Select the genre</mat-label>
+    <mat-select>
+        <mat-option *ngFor="let genre of genres" [value]="genre.id">
+        {{genre.name}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+<div class="thumbnail-container">
+    <app-thumbnail *ngFor="let movie of movies" [movie]="movie"></app-thumbnail>
+</div>

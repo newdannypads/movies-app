@@ -2,7 +2,7 @@ import { environment } from './../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { MovieTmdb, Genre } from './movie-tmdb.interface';
+import { MovieTmdb, Genres } from './movie-tmdb.interface';
 import { MoviesTrending } from './movies-trending.interface';
 
 @Injectable({
@@ -22,8 +22,8 @@ export class TmdbService {
     return this.httpClient.get<MoviesTrending>(url);
   }
 
-  getTmdbGenreMovies(): Observable<Genre>{
+  getTmdbGenreMovies(): Observable<Genres>{
     const url: string = `${ environment.tmdbUrl }genre/movie/list?api_key=${ environment.tmbdApiKey }`;
-    return this.httpClient.get<Genre>(url);
+    return this.httpClient.get<Genres>(url);
   }
 }
