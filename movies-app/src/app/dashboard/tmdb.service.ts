@@ -26,4 +26,19 @@ export class TmdbService {
     const url: string = `${ environment.tmdbUrl }genre/movie/list?api_key=${ environment.tmbdApiKey }`;
     return this.httpClient.get<Genres>(url);
   }
+
+  getTmdbPopularSeries(){
+    const url: string = `${ environment.tmdbUrl }tv/popular?api_key=${ environment.tmbdApiKey }`;
+    return this.httpClient.get<Genres>(url);
+  }
+
+  getTmdbTvSeries(tvId: string) {
+    const url: string = `${ environment.tmdbUrl }tv/${ tvId }?api_key=${ environment.tmbdApiKey }`;
+    return this.httpClient.get<Genres>(url);
+  }
+
+  getTmdbCastTvSeries(tvId: string) {
+    const url: string = `${ environment.tmdbUrl }tv/${ tvId }/credits?api_key=${ environment.tmbdApiKey }`;
+    return this.httpClient.get<Genres>(url);
+  }
 }

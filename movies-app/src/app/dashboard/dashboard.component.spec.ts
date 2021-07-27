@@ -4,7 +4,10 @@ import { of } from 'rxjs';
 import { DashboardComponent } from './dashboard.component';
 import { TmdbService } from './tmdb.service';
 import * as moviesTrending from '../shared/tests/data/movie-trending-data.testdata.json';
-import { MockComponent } from '../../../setup-jest';
+import { AppMaterialDependenciesModule } from '../shared/app-material-dependencies.module';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MockComponent } from 'ng-mocks';
+import { ThumbnailComponent } from './thumbnail/thumbnail.component';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -14,11 +17,17 @@ describe('DashboardComponent', () => {
   beforeEach(
     waitForAsync(() => {
       const mockTmdbService = {
-        getTmdbTrendingMovies: jest.fn(),
+        getTmdbTrendingMovies: jest.fn(() => {
+          return of(moviesTrending.moviesTrendingData)
+        }),
+        getTmdbGenreMovies: jest.fn(() => {
+          return of()
+        }),
       };
 
       TestBed.configureTestingModule({
-        declarations: [DashboardComponent, MockComponent('app-thumbnail', { inputs: [ 'movie' ] })],
+        declarations: [DashboardComponent, MockComponent(ThumbnailComponent)],
+        imports: [AppMaterialDependenciesModule, NoopAnimationsModule ],
         providers: [{ provide: TmdbService, useValue: mockTmdbService }],
       }).compileComponents();
     })
@@ -28,7 +37,6 @@ describe('DashboardComponent', () => {
     fixture = TestBed.createComponent(DashboardComponent);
     component = fixture.componentInstance;
     tmdbService = TestBed.inject(TmdbService);
-    jest.spyOn(tmdbService, 'getTmdbTrendingMovies').mockReturnValue(of(moviesTrending.moviesTrendingData));
     fixture.detectChanges();
   });
 

@@ -7,6 +7,7 @@ import { TmdbService } from './tmdb.service';
 import * as movie from '../shared/tests/data/movie-data.testdata.json';
 import * as moviesTrending from '../shared/tests/data/movie-trending-data.testdata.json';
 import * as moviesGenres from '../shared/tests/data/movie-genres-data.testdata.json';
+import * as popularSeries from '../shared/tests/data/popular-series-data.testdata.json';
 
 describe('TmdbService', () => {
   let service: TmdbService;
@@ -59,6 +60,61 @@ describe('TmdbService', () => {
 
     service.getTmdbGenreMovies().subscribe( (data) => {
       expect(data).toEqual(moviesGenres.moviesGenresData);
+    });
+
+    const request = httpTestingController.expectOne(url);
+    expect(request.request.method).toEqual('GET');
+    request.flush(moviesGenres.moviesGenresData);
+  });
+
+  it('should call all movies genres in tmdb', () => {
+
+    const url: string = `${ environment.tmdbUrl }genre/movie/list?api_key=${ environment.tmbdApiKey }`;
+
+    service.getTmdbGenreMovies().subscribe( (data) => {
+      expect(data).toEqual(moviesGenres.moviesGenresData);
+    });
+
+    const request = httpTestingController.expectOne(url);
+    expect(request.request.method).toEqual('GET');
+    request.flush(moviesGenres.moviesGenresData);
+  });
+
+  it('should call popular series in tmdb', () => {
+
+    const url: string = `${ environment.tmdbUrl }tv/popular?api_key=${ environment.tmbdApiKey }`;
+
+    service.getTmdbPopularSeries().subscribe( (data) => {
+      expect(data).toEqual(popularSeries.popularSeries);
+    });
+
+    const request = httpTestingController.expectOne(url);
+    expect(request.request.method).toEqual('GET');
+    request.flush(moviesGenres.moviesGenresData);
+  });
+
+  it('should call tv series by Id in tmdb', () => {
+
+    const tvId = 'ABC123';
+    const url: string = `${ environment.tmdbUrl }tv/${ tvId }?api_key=${ environment.tmbdApiKey }`;
+
+    service.getTmdbTvSeries(tvId).subscribe( (data) => {
+      expect(data).toEqual(popularSeries.popularSeries[0]);
+    });
+
+    const request = httpTestingController.expectOne(url);
+    expect(request.request.method).toEqual('GET');
+    request.flush(moviesGenres.moviesGenresData);
+  });
+
+
+  it('should call cast tv series by Id in tmdb', () => {
+
+    const tvId = 'ABC123';
+    const url: string = `${ environment.tmdbUrl }tv/${ tvId }/credits?api_key=${ environment.tmbdApiKey }`;
+
+    service.getTmdbCastTvSeries(tvId).subscribe( (data) => {
+      expect(data).toEqual(popularSeries.popularSeries[0]);
     });
 
     const request = httpTestingController.expectOne(url);

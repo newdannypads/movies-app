@@ -16,6 +16,10 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.getTrendingMovies();
     this.getMoviesGenre();
+
+    // this.tmdbService.getTmdbCastTvSeries('84958').subscribe((data) => {
+    //   console.log(data)
+    // })
   }
 
   getTrendingMovies(){
