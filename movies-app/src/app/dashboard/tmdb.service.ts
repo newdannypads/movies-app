@@ -19,11 +19,9 @@ export class TmdbService {
     return this.httpClient.get<MovieTmdb>(url);
   }
 
-  getTmdbTrendingMovies( ): Observable<MovieTrending[]>{
-    const url: string = `${ environment.tmdbUrl }trending/all/day?api_key=${ environment.tmbdApiKey }`;
-    return this.httpClient.get<MoviesTrending>(url).pipe(
-      map(data => data.results.filter((movie) => movie.media_type === 'movie'))
-    );
+  getTmdbTrendingMovies( ): Observable<MoviesTrending>{
+    const url: string = `${ environment.tmdbUrl }trending/movie/week?api_key=${ environment.tmbdApiKey }`;
+    return this.httpClient.get<MoviesTrending>(url)
   }
 
   getTmdbGenreMovies(): Observable<Genres>{

@@ -22,7 +22,7 @@ export class DashboardComponent implements OnInit {
   getTrendingMovies(){
     this.tmdbService.getTmdbTrendingMovies()
     .subscribe((data) => {
-      this.movies = data;
+      this.movies = data.results;
     });
   }
 
