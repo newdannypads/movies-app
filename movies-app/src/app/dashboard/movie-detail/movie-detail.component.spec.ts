@@ -1,17 +1,13 @@
-import { movieOmdbData } from './movie.data';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-
-import { MovieDetailComponent } from './movie-detail.component';
-import { NgImageSliderModule } from 'ng-image-slider';
-import { AppMaterialDependenciesModule } from '../../shared/app-material-dependencies.module';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { TmdbService } from '../tmdb.service';
-import { OmdbService } from '../omdb.service';
-import { of } from 'rxjs';
-import { MockComponent } from 'ng-mocks';
-import { AccordionComponent } from './accordion/accordion.component';
 import { RouterTestingModule } from '@angular/router/testing';
+import { MockComponents } from 'ng-mocks';
+import { of } from 'rxjs';
 import * as movieTestData from '../../shared/tests/data/movie-data.testdata.json';
+import { OmdbService } from '../omdb.service';
+import { TmdbService } from '../tmdb.service';
+import { AccordionComponent } from './accordion/accordion.component';
+import { MovieDetailComponent } from './movie-detail.component';
+import { VideosComponent } from './videos/videos.component';
 
 describe('MovieDetailComponent', () => {
   let component: MovieDetailComponent;
@@ -28,8 +24,8 @@ describe('MovieDetailComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MovieDetailComponent, MockComponent(AccordionComponent) ],
-      imports: [ NgImageSliderModule, RouterTestingModule ],
+      declarations: [ MovieDetailComponent, MockComponents(AccordionComponent, VideosComponent) ],
+      imports: [ RouterTestingModule ],
       providers: [
         { provide : TmdbService, useValue: mockTmdbService },
         { provide : OmdbService, useValue: mockOmdbService },

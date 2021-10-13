@@ -12,6 +12,7 @@ import { MovieDetailComponent } from './dashboard/movie-detail/movie-detail.comp
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AccordionComponent } from './dashboard/movie-detail/accordion/accordion.component';
+import { VideosComponent } from './dashboard/movie-detail/videos/videos.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { AccordionComponent } from './dashboard/movie-detail/accordion/accordion
     ThumbnailComponent,
     MovieDetailComponent,
     AccordionComponent,
+    VideosComponent,
   ],
   imports: [
     BrowserModule,

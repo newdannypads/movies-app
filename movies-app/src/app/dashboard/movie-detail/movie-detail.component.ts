@@ -14,15 +14,11 @@ import { TmdbService } from '../tmdb.service';
 })
 export class MovieDetailComponent implements OnInit {
 
-  @ViewChild('videoPlayer') videoplayer: ElementRef;
-
   movieOmdb: MovieOmdb;
   movieTmdb: MovieTmdb;
   // awards = movieOmdbData.Awards;
-  // videos = movieVideos.results;
 
   movieId: string;
-  videosUrl = [];
   genres = [];
 
   oscars;
@@ -41,8 +37,6 @@ export class MovieDetailComponent implements OnInit {
     this.getMoviesDetails();
     // //this.getWonAwards();
     // this.getWonOscars();
-    // this.getIdVideos();
-    // this.getGenres();
   }
 
   getMoviesDetails() {
@@ -66,9 +60,6 @@ export class MovieDetailComponent implements OnInit {
     return this.omdbService.getOmdbMovie(imdbId)
   }
 
-  getTmdbVideos(){
-
-  }
   // getWonAwards() {
   //   this.wonAwards = this.awards.filter((award) => award.isWinner === true);
   // }
@@ -85,24 +76,4 @@ export class MovieDetailComponent implements OnInit {
   //   );
   // }
 
-  // getGenres(){
-  //   this.movieTmdb.genres.map( genre => {
-  //     this.genres.push(genre.name);
-  //   });
-  // }
-
-  // getIdVideos() {
-  //   this.videos.map((video) => {
-  //     this.videosUrl.push( this.convertVideoObject(video))
-  //   });
-  // }
-
-  // convertVideoObject(video ){
-  //   const test = {
-  //     video: `https://youtu.be/${ video.key }`,
-  //     title: video.name,
-  //     alt: video.name
-  //   }
-  //   return test;
-  // }
 }

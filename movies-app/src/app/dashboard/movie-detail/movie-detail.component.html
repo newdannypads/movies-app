@@ -2,10 +2,7 @@
   <h1> {{ movieTmdb?.title }} - ( {{ movieOmdb?.Year }} ) </h1>
  <div class="movie-container">
     <img [src]="movieOmdb?.Poster" alt="">
-  <ng-image-slider #nav [images]="videosUrl" [infinite]="true" [autoSlide]="1" [animationSpeed]="2"
-		[imageSize]="{width: '50%', height: 250}" slideImage="1">
-  </ng-image-slider>
-
+    <app-videos [movieId]="movieId"></app-videos>
   </div>
 <div>
  <app-accordion [movieTmdb]="movieTmdb" [movieOmdb]="movieOmdb" [genres]="genres"></app-accordion>

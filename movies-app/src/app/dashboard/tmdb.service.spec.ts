@@ -1,18 +1,20 @@
-import { environment } from './../../environments/environment';
-import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { Type } from '@angular/core';
-
-import { TmdbService } from './tmdb.service';
+import { TestBed } from '@angular/core/testing';
 import * as movie from '../shared/tests/data/movie-data.testdata.json';
-import * as moviesTrending from '../shared/tests/data/movie-trending-data.testdata.json';
 import * as moviesGenres from '../shared/tests/data/movie-genres-data.testdata.json';
+import * as moviesTrending from '../shared/tests/data/movie-trending-data.testdata.json';
 import * as popularSeries from '../shared/tests/data/popular-series-data.testdata.json';
+import * as movieVideos from '../shared/tests/data/movie-videos.json';
+import { environment } from './../../environments/environment';
+import { MovieTrending } from './movies-trending.interface';
+import { TmdbService } from './tmdb.service';
+
 
 describe('TmdbService', () => {
   let service: TmdbService;
   let httpTestingController: HttpTestingController;
-
+  const movieId: string = 'ABC123';
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -29,7 +31,6 @@ describe('TmdbService', () => {
   });
 
   it('should call the detail movie in tmdb', () => {
-    const movieId: string = 'ABC123';
     const url: string = `${ environment.tmdbUrl }movie/${ movieId }?api_key=${ environment.tmbdApiKey }`;
 
     service.getTmdbMovie( movieId ).subscribe( (data) => {
@@ -45,8 +46,9 @@ describe('TmdbService', () => {
 
     const url: string = `${ environment.tmdbUrl }trending/all/day?api_key=${ environment.tmbdApiKey }`;
 
+    const results = moviesTrending.moviesTrendingData.results;
     service.getTmdbTrendingMovies().subscribe( (data) => {
-      expect(data).toEqual(moviesTrending.moviesTrendingData);
+      expect(data).toEqual(<MovieTrending[]>results);
     });
 
     const request = httpTestingController.expectOne(url);
@@ -72,6 +74,19 @@ describe('TmdbService', () => {
     const url: string = `${ environment.tmdbUrl }genre/movie/list?api_key=${ environment.tmbdApiKey }`;
 
     service.getTmdbGenreMovies().subscribe( (data) => {
+      expect(data).toEqual(moviesGenres.moviesGenresData);
+    });
+
+    const request = httpTestingController.expectOne(url);
+    expect(request.request.method).toEqual('GET');
+    request.flush(movieVideos);
+  });
+
+  it('should call get all videos related with the movie', () => {
+
+    const url: string = `${ environment.tmdbUrl }movie/${ movieId }/videos?api_key=${ environment.tmbdApiKey }`;
+
+    service.getTmdbVideoMovies(movieId).subscribe( (data) => {
       expect(data).toEqual(moviesGenres.moviesGenresData);
     });
 

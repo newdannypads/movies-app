@@ -1,3 +1,4 @@
+import { MovieVideos } from './movie-videos.interface';
 import { environment } from './../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -28,6 +29,11 @@ export class TmdbService {
   getTmdbGenreMovies(): Observable<Genres>{
     const url: string = `${ environment.tmdbUrl }genre/movie/list?api_key=${ environment.tmbdApiKey }`;
     return this.httpClient.get<Genres>(url);
+  }
+
+  getTmdbVideoMovies(movieId: string): Observable<MovieVideos>{
+    const url: string = `${ environment.tmdbUrl }movie/${ movieId }/videos?api_key=${ environment.tmbdApiKey }`;
+    return this.httpClient.get<MovieVideos>(url);
   }
 
   getTmdbPopularSeries(){
