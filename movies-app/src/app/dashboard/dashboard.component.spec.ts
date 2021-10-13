@@ -1,13 +1,12 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { of } from 'rxjs';
-
-import { DashboardComponent } from './dashboard.component';
-import { TmdbService } from './tmdb.service';
-import * as moviesTrending from '../shared/tests/data/movie-trending-data.testdata.json';
-import { AppMaterialDependenciesModule } from '../shared/app-material-dependencies.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MockComponent } from 'ng-mocks';
+import { of } from 'rxjs';
+import { AppMaterialDependenciesModule } from '../shared/app-material-dependencies.module';
+import * as moviesTrending from '../shared/tests/data/movie-trending-data.testdata.json';
+import { DashboardComponent } from './dashboard.component';
 import { ThumbnailComponent } from './thumbnail/thumbnail.component';
+import { TmdbService } from './tmdb.service';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -18,7 +17,7 @@ describe('DashboardComponent', () => {
     waitForAsync(() => {
       const mockTmdbService = {
         getTmdbTrendingMovies: jest.fn(() => {
-          return of(moviesTrending.moviesTrendingData)
+          return of(moviesTrending.moviesTrendingData.results)
         }),
         getTmdbGenreMovies: jest.fn(() => {
           return of()
@@ -48,5 +47,11 @@ describe('DashboardComponent', () => {
     component.getTrendingMovies();
 
     expect(tmdbService.getTmdbTrendingMovies).toHaveBeenCalledWith();
+  });
+
+  it('should call all genres of movies', () => {
+    component.getMoviesGenre();
+
+    expect(tmdbService.getTmdbGenreMovies).toHaveBeenCalledWith();
   });
 });

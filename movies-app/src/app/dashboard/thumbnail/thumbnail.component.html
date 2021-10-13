@@ -1,4 +1,8 @@
 <div class="movie-container">
-    <div class="photo"><img [src]="posterPath" alt=""></div>
+    <div class="photo">
+      <a [routerLink]="['/detail', movie.id]">
+        <img [src]="posterPath" alt="">
+      </a>
+    </div>
     <div class="name">{{ movie.title }}</div>
 </div>

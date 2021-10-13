@@ -1,30 +1,28 @@
 import { Component, OnInit } from '@angular/core';
+import { MovieTrending } from './movies-trending.interface';
 import { TmdbService } from './tmdb.service';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
 
   constructor(private tmdbService: TmdbService) { }
 
-  movies = [];
+  movies: MovieTrending[] = [];
   genres = []
 
   ngOnInit(): void {
     this.getTrendingMovies();
     this.getMoviesGenre();
-
-    // this.tmdbService.getTmdbCastTvSeries('84958').subscribe((data) => {
-    //   console.log(data)
-    // })
   }
 
   getTrendingMovies(){
-    this.tmdbService.getTmdbTrendingMovies().subscribe((data) => {
-      this.movies = data.results;
+    this.tmdbService.getTmdbTrendingMovies()
+    .subscribe((data) => {
+      this.movies = data;
     });
   }
 

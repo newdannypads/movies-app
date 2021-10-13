@@ -39,7 +39,7 @@
     "Website": "N/A",
     "Response": "True"
   },
-  "movieTmdbData": {
+  "movieTmdb": {
     "adult": false,
     "backdrop_path": "/mfwq2nMBzArzQ7Y9RKE8SKeeTkg.jpg",
     "belongs_to_collection": {

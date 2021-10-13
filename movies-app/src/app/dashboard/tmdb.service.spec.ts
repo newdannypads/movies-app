@@ -33,12 +33,12 @@ describe('TmdbService', () => {
     const url: string = `${ environment.tmdbUrl }movie/${ movieId }?api_key=${ environment.tmbdApiKey }`;
 
     service.getTmdbMovie( movieId ).subscribe( (data) => {
-      expect(data).toEqual(movie.movieTmdbData);
+      expect(data).toEqual(movie.movieTmdb);
     });
 
     const request = httpTestingController.expectOne(url);
     expect(request.request.method).toEqual('GET');
-    request.flush(movie.movieTmdbData);
+    request.flush(movie.movieTmdb);
   });
 
   it('should call the trending movies in tmdb', () => {

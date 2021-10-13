@@ -1,12 +1,12 @@
 
 export interface MoviesTrending {
   page:          number;
-  results:       Result[];
+  results:       MovieTrending[];
   total_pages:   number;
   total_results: number;
 }
 
-export interface Result {
+export interface MovieTrending {
   video?:            boolean;
   vote_average:      number;
   overview:          string;

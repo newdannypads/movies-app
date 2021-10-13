@@ -10,6 +10,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ThumbnailComponent } from './dashboard/thumbnail/thumbnail.component';
 import { MovieDetailComponent } from './dashboard/movie-detail/movie-detail.component';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+import { AccordionComponent } from './dashboard/movie-detail/accordion/accordion.component';
 
 
 @NgModule({
@@ -18,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
     DashboardComponent,
     ThumbnailComponent,
     MovieDetailComponent,
+    AccordionComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,7 +28,8 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     HttpClientModule,
     AppMaterialDependenciesModule,
-    NgImageSliderModule
+    NgImageSliderModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
