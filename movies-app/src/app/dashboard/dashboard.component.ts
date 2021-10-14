@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from '../../environments/environment';
 import { MovieTrending } from './movies-trending.interface';
 import { TmdbService } from './tmdb.service';
 
@@ -11,7 +12,7 @@ export class DashboardComponent implements OnInit {
 
   constructor(private tmdbService: TmdbService) { }
 
-  movies: MovieTrending[] = [];
+  movies: MovieTrending[];
   genres = []
 
   ngOnInit(): void {
@@ -31,4 +32,6 @@ export class DashboardComponent implements OnInit {
       this.genres = data.genres;
     })
   }
+
+
 }

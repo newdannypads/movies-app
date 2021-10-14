@@ -1,5 +1,9 @@
-<div class="video-container">
-  <ng-image-slider #nav [images]="videosUrl" [infinite]="true" [autoSlide]="1" [animationSpeed]="2"
-  [imageSize]="{width: '50%', height: 350}" slideImage="1">
-  </ng-image-slider>
-</div>
+<ng-image-slider
+  #nav
+  [images]="videosUrl"
+  [infinite]="false"
+  [autoSlide]="1"
+  [imageSize]="{ width: '50%', height: 350 }"
+  slideImage="1"
+>
+</ng-image-slider>
