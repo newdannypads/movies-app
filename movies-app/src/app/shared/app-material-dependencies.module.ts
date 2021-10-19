@@ -9,6 +9,10 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [],
@@ -21,7 +25,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatDividerModule,
     MatListModule,
     MatSelectModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatInputModule,
+    MatDialogModule
   ],
   exports: [
     MatExpansionModule,
@@ -31,7 +39,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatDividerModule,
     MatListModule,
     MatSelectModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatInputModule,
+    MatDialogModule
   ]
 })
 export class AppMaterialDependenciesModule { }

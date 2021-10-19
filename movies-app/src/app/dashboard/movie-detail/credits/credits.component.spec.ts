@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
 
 import { CreditsComponent } from './credits.component';
-import { PosterPipe } from '../../shared/pipes/poster.pipe';
+import { PosterPipe } from '../../../shared/pipes/poster.pipe';
 
 describe('CreditsComponent', () => {
   let component: CreditsComponent;

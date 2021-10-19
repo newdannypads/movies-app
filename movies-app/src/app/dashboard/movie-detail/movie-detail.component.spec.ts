@@ -15,8 +15,8 @@ import { TmdbService } from '../tmdb.service';
 import { AccordionComponent } from './accordion/accordion.component';
 import { MovieDetailComponent } from './movie-detail.component';
 import { VideosComponent } from './videos/videos.component';
-import { CreditsComponent } from '../credits/credits.component';
 import { PosterPipe } from '../../shared/pipes/poster.pipe';
+import { CreditsComponent } from './credits/credits.component';
 
 describe('MovieDetailComponent', () => {
   let component: MovieDetailComponent;

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from './../../environments/environment';
 import { Genres, MovieTmdb } from './movie-tmdb.interface';
 import { MovieVideos } from './movie-videos.interface';
-import { NowPlaying } from './movies-trending.interface';
+import { Movie, NowPlaying } from './movies-trending.interface';
 import { Cast, Credits } from './credits.interface';
 import { map } from 'rxjs/operators';
 
@@ -45,10 +45,19 @@ export class TmdbService {
   }
 
   getCastMovie(movieId: string): Observable<Cast[]> {
-    const url: string = `${ environment.tmdbUrl }/movie/${ movieId }/credits`;
+    const url: string = `${ environment.tmdbUrl }movie/${ movieId }/credits`;
     return this.httpClient.get<Credits>(url, { params: this.params })
     .pipe(
       map( resp => resp.cast ),
+    )
+  }
+
+  searchMovie(query: string): Observable<Movie[]>{
+    const url: string = `${ environment.tmdbUrl }search/movie?query=${ query }`;
+    return this.httpClient.get<NowPlaying>(url, {
+      params: this.params
+    }).pipe(
+      map( resp => resp.results )
     )
   }
 

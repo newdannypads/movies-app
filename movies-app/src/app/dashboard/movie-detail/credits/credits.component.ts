@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { SwiperOptions } from 'swiper';
-import { Cast } from '../credits.interface';
+import { Cast } from '../../credits.interface';
 
 @Component({
   selector: 'app-credits',

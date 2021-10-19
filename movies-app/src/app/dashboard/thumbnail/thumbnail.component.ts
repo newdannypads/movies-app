@@ -1,8 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { SwiperOptions } from 'swiper';
-import { environment } from '../../../environments/environment';
 import { Movie } from '../movies-trending.interface';
-
 
 @Component({
   selector: 'app-thumbnail',
