@@ -1,8 +1,28 @@
-<div class="movie-container">
-    <div class="photo">
-      <a [routerLink]="['/detail', movie.id]">
-        <img [src]="posterPath" alt="">
-      </a>
+<swiper [config]="config">
+  <div class="swiper-wrapper">
+    <div
+      *ngFor="let movie of movies"
+      class="swiper-slide"
+      [ngStyle]="{
+        'background-size': 'cover',
+        'background-image': 'url(' + (movie.poster_path | poster: 'original') + ')'
+      }"
+    >
+      <div [routerLink]="['/detail', movie.id]" class="movie-description">
+        <h3>{{ movie.title }}</h3>
+        <p>{{ movie.overview | slice: 0:130 }}...</p>
+        <star-rating
+          [value]="movie.vote_average"
+          totalstars="10"
+          checkedcolor="yellow"
+          uncheckedcolor="grey"
+          size="14px"
+          readonly="false"
+        ></star-rating>
+      </div>
     </div>
-    <div class="name">{{ movie.title }}</div>
-</div>
+  </div>
+  <div class="swiper-pagination"></div>
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+</swiper>

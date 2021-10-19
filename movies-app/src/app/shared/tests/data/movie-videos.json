@@ -36,19 +36,16 @@
   },
   "movieVideoUrl": [
     {
-      "video": "https://youtu.be/8xWbc_kFus4",
-      "title": "Jodie Foster On Hannibal Lecter",
-      "alt": "Jodie Foster On Hannibal Lecter"
+      "url": "https://www.youtube.com/embed/8xWbc_kFus4",
+      "name": "Jodie Foster On Hannibal Lecter"
     },
     {
-      "video": "https://youtu.be/W6Mm8Sbe__o",
-      "title": "The Silence of the Lambs Official Trailer #1 - Anthony Hopkins Movie (1991) HD",
-      "alt": "The Silence of the Lambs Official Trailer #1 - Anthony Hopkins Movie (1991) HD"
+      "url": "https://www.youtube.com/embed/W6Mm8Sbe__o",
+      "name": "The Silence of the Lambs Official Trailer #1 - Anthony Hopkins Movie (1991) HD"
     },
     {
-      "video": "https://youtu.be/irUd4SSif5A",
-      "title": "The Silence of the Lambs Bloopers & Gag Reel (1991)",
-      "alt": "The Silence of the Lambs Bloopers & Gag Reel (1991)"
+      "url": "https://www.youtube.com/embed/irUd4SSif5A",
+      "name": "The Silence of the Lambs Bloopers & Gag Reel (1991)"
     }
   ]
 }

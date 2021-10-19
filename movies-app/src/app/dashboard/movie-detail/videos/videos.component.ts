@@ -1,6 +1,6 @@
-import { MovieVideos } from './../../movie-videos.interface';
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { TmdbService } from '../../tmdb.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { SwiperOptions } from 'swiper';
+import { VideoItem } from '../../movie-videos.interface';
 
 @Component({
   selector: 'app-videos',
@@ -8,36 +8,44 @@ import { TmdbService } from '../../tmdb.service';
   styleUrls: ['./videos.component.scss'],
 })
 export class VideosComponent implements OnInit {
-  @Input() movieId: string;
-  @ViewChild('videoPlayer') videoplayer: ElementRef;
+  @Input() videos: VideoItem[];
 
-  videosUrl = [];
+  videosUrl: { url: string, name: string }[] = [];
+  config: SwiperOptions;
 
-  constructor(private tmdbService: TmdbService) {}
+  constructor() {}
 
   ngOnInit(): void {
-    this.getMovieVideos();
+    this.getUrlVideos();
+    this.configSwiper();
   }
 
-  getMovieVideos() {
-    this.tmdbService
-      .getTmdbVideoMovies(this.movieId)
-      .subscribe((videos: MovieVideos) => {
-        this.getUrlVideos(videos.results);
-      });
+  configSwiper(){
+    this.config = {
+      loop: true,
+      slidesPerView: 3,
+      spaceBetween: 30,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev'
+      }
+    };
   }
 
-  getUrlVideos(videos) {
-    videos.forEach((video) => {
+  getUrlVideos() {
+    this.videos.forEach((video) => {
       this.videosUrl.push(this.convertVideoObject(video));
     });
   }
 
-  convertVideoObject({ name, key }) {
+  convertVideoObject({ name, key }): { url: string, name: string } {
     return {
-      video: `https://youtu.be/${key}`,
-      title: name,
-      alt: name,
+      url: `https://www.youtube.com/embed/${key}`,
+      name
     };
   }
 }

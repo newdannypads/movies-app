@@ -7,6 +7,7 @@
     </mat-option>
   </mat-select>
 </mat-form-field>
-<div class="thumbnail-container">
-  <app-thumbnail *ngFor="let movie of movies" [movie]="movie"></app-thumbnail>
+<div *ngIf="movies?.length > 0">
+  <app-thumbnail [movies]="movies"></app-thumbnail>
 </div>
+

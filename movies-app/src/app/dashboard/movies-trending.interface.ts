@@ -1,39 +1,36 @@
-
-export interface MoviesTrending {
+export interface NowPlaying {
+  results:       Movie[];
   page:          number;
-  results:       MovieTrending[];
-  total_pages:   number;
   total_results: number;
+  dates:         Dates;
+  total_pages:   number;
 }
 
-export interface MovieTrending {
-  video?:            boolean;
+export interface Dates {
+  maximum: Date;
+  minimum: Date;
+}
+
+export interface Movie {
+  popularity:        number;
+  vote_count:        number;
+  video:             boolean;
+  poster_path:       string;
+  id:                number;
+  adult:             boolean;
+  backdrop_path:     string;
+  original_language: OriginalLanguage;
+  original_title:    string;
+  genre_ids:         number[];
+  title:             string;
   vote_average:      number;
   overview:          string;
-  release_date?:     string;
-  vote_count:        number;
-  adult?:            boolean;
-  backdrop_path:     string;
-  title?:            string;
-  genre_ids:         number[];
-  id:                number;
-  original_language: OriginalLanguage;
-  original_title?:   string;
-  poster_path:       string;
-  popularity:        number;
-  media_type:        MediaType;
-  name?:             string;
-  original_name?:    string;
-  origin_country?:   string[];
-  first_air_date?:   string;
-}
-
-export enum MediaType {
-  Movie = "movie",
-  Tv = "tv",
+  release_date:      Date;
+  poster_url?:        string;
 }
 
 export enum OriginalLanguage {
   En = "en",
-  Ru = "ru",
+  Es = "es",
+  Ko = "ko",
 }

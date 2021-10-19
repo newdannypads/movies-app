@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { environment } from '../../environments/environment';
-import { MovieTrending } from './movies-trending.interface';
 import { TmdbService } from './tmdb.service';
+import { Movie } from './movies-trending.interface';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,10 +9,10 @@ import { TmdbService } from './tmdb.service';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private tmdbService: TmdbService) { }
-
-  movies: MovieTrending[];
+  movies: Movie[] = [];
   genres = []
+
+  constructor(private tmdbService: TmdbService) { }
 
   ngOnInit(): void {
     this.getTrendingMovies();
@@ -21,7 +20,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getTrendingMovies(){
-    this.tmdbService.getTmdbTrendingMovies()
+    this.tmdbService.getTmdbNowPlayingMovies()
     .subscribe((data) => {
       this.movies = data.results;
     });
@@ -30,7 +29,7 @@ export class DashboardComponent implements OnInit {
   getMoviesGenre(){
     this.tmdbService.getTmdbGenreMovies().subscribe((data) => {
       this.genres = data.genres;
-    })
+    });
   }
 
 

@@ -1,28 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NgImageSliderModule } from 'ng-image-slider';
-import { of } from 'rxjs';
-import { TmdbService } from '../../tmdb.service';
-import { VideosComponent } from './videos.component';
+import { RatingModule } from 'ng-starrating';
+import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
+import { SanitizeUrlPipe } from '../../../shared/pipes/sanitize-url.pipe';
 import * as videos from '../../../shared/tests/data/movie-videos.json';
+import { VideosComponent } from './videos.component';
 
 
 describe('VideosComponent', () => {
   let component: VideosComponent;
   let fixture: ComponentFixture<VideosComponent>;
-  const movieId = 'ABC123'
-
-  const mockTmdbService = {
-    getTmdbVideoMovies: jest.fn(() => of())
-  }
 
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ VideosComponent ],
-      imports: [ NgImageSliderModule ],
-      providers: [
-        { provide : TmdbService, useValue: mockTmdbService },
-      ]
+      declarations: [ VideosComponent, SanitizeUrlPipe ],
+      imports: [  NgxUsefulSwiperModule, RatingModule ],
     })
     .compileComponents();
   });
@@ -30,6 +22,7 @@ describe('VideosComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(VideosComponent);
     component = fixture.componentInstance;
+    component.videos = videos.movieVideo.results;
     fixture.detectChanges();
   });
 
@@ -37,16 +30,10 @@ describe('VideosComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should call all movie videos', () => {
-    component.movieId = movieId;
-    component.getMovieVideos();
-
-    expect(mockTmdbService.getTmdbVideoMovies).toHaveBeenCalledWith(movieId);
-  });
-
   it('should get all videos url', () => {
-    const videosData = videos.movieVideo.results;
-    component.getUrlVideos(videosData);
+    component.videosUrl = [];
+
+    component.getUrlVideos();
 
     expect(component.videosUrl).toEqual(videos.movieVideoUrl);
   });

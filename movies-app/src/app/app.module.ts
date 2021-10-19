@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-
-import { NgImageSliderModule } from 'ng-image-slider';
+import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
+import { RatingModule } from 'ng-starrating';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -13,6 +13,9 @@ import { MovieDetailComponent } from './dashboard/movie-detail/movie-detail.comp
 import { VideosComponent } from './dashboard/movie-detail/videos/videos.component';
 import { ThumbnailComponent } from './dashboard/thumbnail/thumbnail.component';
 import { AppMaterialDependenciesModule } from './shared/app-material-dependencies.module';
+import { SanitizeUrlPipe } from './shared/pipes/sanitize-url.pipe';
+import { CreditsComponent } from './dashboard/credits/credits.component';
+import { PosterPipe } from './shared/pipes/poster.pipe';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,10 @@ import { AppMaterialDependenciesModule } from './shared/app-material-dependencie
     ThumbnailComponent,
     MovieDetailComponent,
     AccordionComponent,
-    VideosComponent
+    VideosComponent,
+    CreditsComponent,
+    SanitizeUrlPipe,
+    PosterPipe
   ],
   imports: [
     BrowserModule,
@@ -29,8 +35,9 @@ import { AppMaterialDependenciesModule } from './shared/app-material-dependencie
     BrowserAnimationsModule,
     HttpClientModule,
     AppMaterialDependenciesModule,
-    NgImageSliderModule,
     RouterModule,
+    RatingModule,
+    NgxUsefulSwiperModule
   ],
   providers: [],
   bootstrap: [AppComponent]
