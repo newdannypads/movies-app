@@ -1,26 +1,9 @@
 
 .movie-container{
   img{
-    width: 25rem;
+    width: 50%;
   }
 }
-
-mat-accordion{
-
-  .align-oscars{
-    display: flex;
-    flex-direction: row;
-    .oscars{
-      width: 1.5rem;
-      height: 3rem;
-    }
-  }
-  .award-container{
-    display: flex;
-    justify-content: space-between;
-  }
-}
-
 
 .example-action-buttons {
   padding-bottom: 20px;

@@ -14,8 +14,28 @@ export class AccordionComponent implements OnInit {
   @Input() movieTmdb: MovieTmdb;
   @Input() genres;
 
-  constructor() { }
+  oscars: number[];
+  awards: string;
 
-  ngOnInit(): void { }
+  constructor() {
+
+  }
+
+  ngOnInit(): void {
+    this.getAwards();
+   }
+
+  getAwards() {
+    this.movieOmdb.Awards.split('. ').map(
+      (award) => {
+        if( award.includes('Oscar')){
+          const numberOfOscars = +award.split(' ')[1];
+          this.oscars = Array.from(Array(numberOfOscars).keys())
+        }else{
+          this.awards = award.trim();
+        }
+      }
+    );
+  }
 
 }

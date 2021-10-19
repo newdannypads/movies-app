@@ -25,7 +25,6 @@ export class MovieDetailComponent implements OnInit {
   movieTmdb: MovieTmdb;
   castTmdb: Cast[];
   videosTmdb: VideoItem[];
-  // awards = movieOmdbData.Awards;
 
   movieId: string;
   genres = [];
@@ -44,8 +43,6 @@ export class MovieDetailComponent implements OnInit {
   ngOnInit(): void {
     this.movieId = this.activatedRoute.snapshot.paramMap.get('id');
     this.getMoviesDetails();
-    // //this.getWonAwards();
-    // this.getWonOscars();
   }
 
   getMoviesDetails() {
@@ -83,22 +80,4 @@ export class MovieDetailComponent implements OnInit {
     this.videosTmdb = videosTmdb.results;
     this.castTmdb = castTmdb.filter((actor) => actor.profile_path !== null);
   }
-
-
-
-  // getWonAwards() {
-  //   this.wonAwards = this.awards.filter((award) => award.isWinner === true);
-  // }
-
-  // getWonOscars() {
-  //   //this.oscars =
-  //   this.awards.split('.').map(
-  //     (award) => {
-  //       if( award.includes('Oscar')){
-  //         const numberOfOscars = +award.split(' ')[1];
-  //         this.oscars = Array.from(Array(numberOfOscars).keys())
-  //       }
-  //     }
-  //   );
-  // }
 }

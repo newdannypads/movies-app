@@ -1,7 +1,7 @@
 <div *ngIf="movieTmdb && movieOmdb">
   <h1>{{ movieTmdb.title }} - ( {{ movieOmdb.Year }} )</h1>
   <div class="movie-container">
-    <img [src]="movieOmdb.Poster" alt="" />
+    <img [src]="movieTmdb.backdrop_path | poster: 'original'" alt="" />
     <app-videos [videos]="videosTmdb"></app-videos>
   </div>
   <div>

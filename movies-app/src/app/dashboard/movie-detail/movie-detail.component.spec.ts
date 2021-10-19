@@ -1,4 +1,9 @@
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  fakeAsync,
+  TestBed,
+  tick,
+} from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MockComponents } from 'ng-mocks';
 import { of } from 'rxjs';
@@ -11,33 +16,35 @@ import { AccordionComponent } from './accordion/accordion.component';
 import { MovieDetailComponent } from './movie-detail.component';
 import { VideosComponent } from './videos/videos.component';
 import { CreditsComponent } from '../credits/credits.component';
+import { PosterPipe } from '../../shared/pipes/poster.pipe';
 
 describe('MovieDetailComponent', () => {
   let component: MovieDetailComponent;
   let fixture: ComponentFixture<MovieDetailComponent>;
 
-
   const mockTmdbService = {
     getTmdbMovie: jest.fn(() => of(movieTestData.movieTmdb)),
     getCastMovie: jest.fn(() => of(movieCastData.credits.cast)),
     getTmdbVideoMovies: jest.fn(() => of(videos.movieVideo)),
-  }
+  };
 
   const mockOmdbService = {
-    getOmdbMovie: jest.fn(() => of(movieTestData.movieOmdb))
-  }
+    getOmdbMovie: jest.fn(() => of(movieTestData.movieOmdb)),
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MovieDetailComponent, MockComponents(AccordionComponent, VideosComponent, CreditsComponent) ],
-      imports: [ RouterTestingModule ],
+      declarations: [
+        MovieDetailComponent,
+        MockComponents(AccordionComponent, VideosComponent, CreditsComponent),
+       PosterPipe
+      ],
+      imports: [RouterTestingModule],
       providers: [
-        { provide : TmdbService, useValue: mockTmdbService },
-        { provide : OmdbService, useValue: mockOmdbService },
-      ]
-
-    })
-    .compileComponents();
+        { provide: TmdbService, useValue: mockTmdbService },
+        { provide: OmdbService, useValue: mockOmdbService },
+      ],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -51,7 +58,7 @@ describe('MovieDetailComponent', () => {
   });
 
   it('should call TmdbMovie', () => {
-    const movieId =  'movieId';
+    const movieId = 'movieId';
     component.movieId = 'movieId';
 
     component.getMoviesDetails();
@@ -60,7 +67,7 @@ describe('MovieDetailComponent', () => {
   });
 
   it('should call castMovie', () => {
-    const movieId =  'movieId';
+    const movieId = 'movieId';
     component.movieId = 'movieId';
 
     component.getMoviesDetails();
@@ -69,7 +76,7 @@ describe('MovieDetailComponent', () => {
   });
 
   it('should call castMovie', () => {
-    const movieId =  'movieId';
+    const movieId = 'movieId';
     component.movieId = 'movieId';
 
     component.getMoviesDetails();
@@ -77,12 +84,13 @@ describe('MovieDetailComponent', () => {
     expect(mockTmdbService.getTmdbVideoMovies).toHaveBeenCalledWith(movieId);
   });
 
-
   it('should call omdbMovie with tmdbId', fakeAsync(() => {
     component.getMoviesDetails();
     tick();
 
-    expect(mockOmdbService.getOmdbMovie).toHaveBeenCalledWith(movieTestData.movieTmdb.imdb_id);
+    expect(mockOmdbService.getOmdbMovie).toHaveBeenCalledWith(
+      movieTestData.movieTmdb.imdb_id
+    );
   }));
 
   it('should set the correct values', () => {
