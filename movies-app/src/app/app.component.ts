@@ -14,12 +14,8 @@ export class AppComponent {
   constructor(public dialog: MatDialog) {}
 
   openDialog() {
-    const dialogRef = this.dialog.open(SearchDialogComponent,{
+    this.dialog.open(SearchDialogComponent,{
       position: { right: '3rem', top: '3rem'}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
     });
   }
 }

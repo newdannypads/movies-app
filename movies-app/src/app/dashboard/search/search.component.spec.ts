@@ -1,14 +1,42 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { of } from 'rxjs';
+import { TmdbService } from '../tmdb.service';
+import * as movies from '../../shared/tests/data/movie-now-playin-data.testdata.json';
 import { SearchComponent } from './search.component';
+import { MockComponent } from 'ng-mocks';
+import { ThumbnailComponent } from '../thumbnail/thumbnail.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { ActivatedRoute } from '@angular/router';
 
 describe('SearchComponent', () => {
   let component: SearchComponent;
   let fixture: ComponentFixture<SearchComponent>;
 
+  const mockActivatedRoute = {
+    snapshot: {
+      paramMap: {
+        get: name => {
+          const mock = {
+            'query': 'test',
+          };
+          return mock[name];
+        },
+      },
+    },
+  };
+
+  const mockTmdbService = {
+    searchMovie: jest.fn(() => of(movies.moviesNowPlayingData.results))
+  };
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SearchComponent ]
+      declarations: [ SearchComponent, MockComponent(ThumbnailComponent) ],
+      providers: [
+        { provide: TmdbService, useValue: mockTmdbService },
+        { provide: ActivatedRoute, useValue: mockActivatedRoute }
+      ],
+      imports:[ RouterTestingModule ]
     })
     .compileComponents();
   });
@@ -21,5 +49,9 @@ describe('SearchComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should call search components', () => {
+    expect(mockTmdbService.searchMovie).toHaveBeenCalledWith('test');
   });
 });

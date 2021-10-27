@@ -5,24 +5,42 @@
       class="swiper-slide"
       [ngStyle]="{
         'background-size': 'cover',
-        'background-image': 'url(' + (movie.poster_path | poster: 'original') + ')'
+        'background-image':
+          'url(' + (movie.poster_path | poster: 'original') + ')',
+          'height': imageHeight
       }"
     >
-      <div [routerLink]="['/detail', movie.id]" class="movie-description">
+      <div class="movie-description">
         <h3>{{ movie.title }}</h3>
         <p>{{ movie.overview | slice: 0:130 }}...</p>
-        <star-rating
+        <div class="see-more">
+          <!-- <star-rating
+            [value]="movie.vote_average"
+            totalstars="10"
+            checkedcolor="yellow"
+            uncheckedcolor="grey"
+            size="14px"
+            readonly="false"
+          ></star-rating> -->
+          <ng-rating-bar
           [value]="movie.vote_average"
-          totalstars="10"
-          checkedcolor="yellow"
-          uncheckedcolor="grey"
-          size="14px"
-          readonly="false"
-        ></star-rating>
+          [ratingCount]="10"
+          styles="{  fontSize: '14px' }"
+          colorActive="yellow"
+          disabled="true"
+        ></ng-rating-bar>
+         <button
+            mat-raised-button
+            color="primary"
+            [routerLink]="['/detail', movie.id]"
+          >
+            See More
+          </button>
+         </div>
       </div>
     </div>
   </div>
-  <div class="swiper-pagination"></div>
-  <div class="swiper-button-next"></div>
-  <div class="swiper-button-prev"></div>
+  <div *ngIf="config.pagination" class="swiper-pagination"></div>
+  <div *ngIf="config.navigation" class="swiper-button-next"></div>
+  <div *ngIf="config.navigation" class="swiper-button-prev"></div>
 </swiper>

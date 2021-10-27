@@ -10,28 +10,14 @@ import { Movie } from '../movies-trending.interface';
 export class ThumbnailComponent implements OnInit {
 
   @Input() movies: Movie[] = [];
-  config: SwiperOptions;
+  @Input() imageHeight: string;
+  @Input() config: SwiperOptions;
 
   constructor() { }
 
 
   ngOnInit(): void {
-    this.configSwiper();
   }
 
-  configSwiper(){
-    this.config = {
-      loop: true,
-      slidesPerView: 3,
-      spaceBetween: 30,
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true
-      },
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev'
-      }
-    };
-  }
+
 }

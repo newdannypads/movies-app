@@ -4,7 +4,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-import { RatingModule } from 'ng-starrating';
 import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,6 +18,7 @@ import { PosterPipe } from './shared/pipes/poster.pipe';
 import { SanitizeUrlPipe } from './shared/pipes/sanitize-url.pipe';
 import { SearchDialogComponent } from './dashboard/search-dialog/search-dialog.component';
 import { CreditsComponent } from './dashboard/movie-detail/credits/credits.component';
+import { NgRatingBarModule } from 'ng-rating-bar';
 
 @NgModule({
   declarations: [
@@ -41,9 +41,9 @@ import { CreditsComponent } from './dashboard/movie-detail/credits/credits.compo
     HttpClientModule,
     AppMaterialDependenciesModule,
     RouterModule,
-    RatingModule,
     NgxUsefulSwiperModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgRatingBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -9,6 +9,7 @@ import * as popularSeries from '../shared/tests/data/popular-series-data.testdat
 import * as movieCast from '../shared/tests/data/movie-cast.json';
 import { environment } from './../../environments/environment';
 import { TmdbService } from './tmdb.service';
+import { Movie } from './movies-trending.interface';
 
 
 describe('TmdbService', () => {
@@ -68,35 +69,22 @@ describe('TmdbService', () => {
     request.flush(moviesGenres.moviesGenresData);
   });
 
-  it('should call all movies genres in tmdb', () => {
-
-    const url: string = `${ environment.tmdbUrl }genre/movie/list${ params }`;
-
-    service.getTmdbGenreMovies().subscribe( (data) => {
-      expect(data).toEqual(moviesGenres.moviesGenresData);
-    });
-
-    const request = httpTestingController.expectOne(url);
-    expect(request.request.method).toEqual('GET');
-    request.flush(movieVideos);
-  });
-
   it('should get all videos related with the movie', () => {
 
     const url: string = `${ environment.tmdbUrl }movie/${ movieId }/videos${ params }`;
 
     service.getTmdbVideoMovies(movieId).subscribe( (data) => {
-      expect(data).toEqual(moviesGenres.moviesGenresData);
+      expect(data).toEqual(movieVideos.movieVideo);
     });
 
     const request = httpTestingController.expectOne(url);
     expect(request.request.method).toEqual('GET');
-    request.flush(moviesGenres.moviesGenresData);
+    request.flush(movieVideos.movieVideo);
   });
 
   it('should get all movie cast', () => {
 
-    const url: string = `${ environment.tmdbUrl }/movie/${ movieId }/credits${ params }`;
+    const url: string = `${ environment.tmdbUrl }movie/${ movieId }/credits${ params }`;
 
     service.getCastMovie(movieId).subscribe( (data) => {
       expect(data).toEqual(movieCast.credits.cast);
@@ -106,6 +94,21 @@ describe('TmdbService', () => {
     expect(request.request.method).toEqual('GET');
     request.flush(movieCast.credits.cast);
   });
+
+  it('should search all movies', () => {
+
+    const query: string = 'test';
+    const url: string = `${ environment.tmdbUrl }search/movie?query=${ query }&api_key=${ environment.tmbdApiKey }&page=1`;
+
+    service.searchMovie(query).subscribe( (data) => {
+      expect(data).toEqual(movies.moviesNowPlayingData);
+    });
+
+    const request = httpTestingController.expectOne(url);
+    expect(request.request.method).toEqual('GET');
+    request.flush(movies.moviesNowPlayingData);
+  });
+
 
   it('should call popular series in tmdb', () => {
 

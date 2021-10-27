@@ -20,7 +20,10 @@ export class SearchDialogComponent implements OnInit {
   }
 
   searchMovies(){
-    this.router.navigateByUrl(`search/${ this.searchForm.controls['query'].value }`)
+    const query = this.searchForm.controls['query'].value;
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigateByUrl(`search/${ query }`);
+  });
   }
 
 }

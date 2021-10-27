@@ -52,13 +52,11 @@ export class TmdbService {
     )
   }
 
-  searchMovie(query: string): Observable<Movie[]>{
+  searchMovie(query: string): Observable<NowPlaying>{
     const url: string = `${ environment.tmdbUrl }search/movie?query=${ query }`;
     return this.httpClient.get<NowPlaying>(url, {
       params: this.params
-    }).pipe(
-      map( resp => resp.results )
-    )
+    });
   }
 
   getTmdbPopularSeries(){

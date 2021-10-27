@@ -8,6 +8,7 @@
   </mat-select>
 </mat-form-field>
 <div *ngIf="movies?.length > 0">
-  <app-thumbnail [movies]="movies"></app-thumbnail>
+  <app-thumbnail [movies]="movies" [imageHeight]="imageHeight" [config]="config"></app-thumbnail>
 </div>
+
 

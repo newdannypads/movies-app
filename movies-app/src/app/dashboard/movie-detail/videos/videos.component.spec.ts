@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RatingModule } from 'ng-starrating';
 import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
 import { SanitizeUrlPipe } from '../../../shared/pipes/sanitize-url.pipe';
 import * as videos from '../../../shared/tests/data/movie-videos.json';
@@ -14,7 +13,7 @@ describe('VideosComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ VideosComponent, SanitizeUrlPipe ],
-      imports: [  NgxUsefulSwiperModule, RatingModule ],
+      imports: [  NgxUsefulSwiperModule ],
     })
     .compileComponents();
   });

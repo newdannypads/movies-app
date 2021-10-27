@@ -1,5 +1,5 @@
 swiper {
-  height: 80vh;
+  // height: 85vh;
   width: 100%;
   .swiper-wrapper{
     .swiper-slide{
@@ -14,12 +14,20 @@ swiper {
         padding: 5px 30px;
         position: absolute;
         width: 100%;
-        cursor: pointer;
         h3{
           font-weight: 700;
         }
         p{
-          padding-right: 2rem;
+          padding-right: 2.5rem;
+        }
+        .see-more {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          padding: 0 2.5rem 1rem 0;
+          star-rating{
+            width: 70%;
+          }
         }
       }
     }
