@@ -14,14 +14,6 @@
         <h3>{{ movie.title }}</h3>
         <p>{{ movie.overview | slice: 0:130 }}...</p>
         <div class="see-more">
-          <!-- <star-rating
-            [value]="movie.vote_average"
-            totalstars="10"
-            checkedcolor="yellow"
-            uncheckedcolor="grey"
-            size="14px"
-            readonly="false"
-          ></star-rating> -->
           <ng-rating-bar
           [value]="movie.vote_average"
           [ratingCount]="10"

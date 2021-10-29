@@ -1,15 +1,16 @@
+<h1 class="mat-display-1">Cast</h1>
 <swiper [config]="config">
   <div class="swiper-wrapper">
-
-      <div *ngFor="let actor of cast"
-           class="swiper-slide text-white text-center">
-
+      <div class="cast-container" *ngFor="let actor of cast"
+           class="swiper-slide">
           <img [src]="actor.profile_path | poster: 'w500'"
                [alt]="actor.name"
                class="img-thumbnail"/>
-          {{ actor.name }}
+               <div class="cast-details">
+                 <span><strong>{{ actor.name }}</strong></span>
+                 <span>{{ actor.character }} </span>
+               </div>
       </div>
-
   </div>
 </swiper>
 

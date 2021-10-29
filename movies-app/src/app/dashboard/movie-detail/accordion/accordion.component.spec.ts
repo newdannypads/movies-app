@@ -3,7 +3,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { AppMaterialDependenciesModule } from '../../../shared/app-material-dependencies.module';
 import { AccordionComponent } from './accordion.component';
 import * as movieData from '../../../shared/tests/data/movie-data.testdata.json';
-
+import { NgRatingBarModule } from 'ng-rating-bar';
 
 describe('AccordionComponent', () => {
   let component: AccordionComponent;
@@ -12,7 +12,7 @@ describe('AccordionComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ AccordionComponent ],
-      imports: [ AppMaterialDependenciesModule, NoopAnimationsModule ]
+      imports: [ AppMaterialDependenciesModule, NoopAnimationsModule, NgRatingBarModule ]
     })
     .compileComponents();
   });

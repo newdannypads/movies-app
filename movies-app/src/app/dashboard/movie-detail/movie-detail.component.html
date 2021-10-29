@@ -1,15 +1,15 @@
-<div *ngIf="movieTmdb && movieOmdb">
-  <h1>{{ movieTmdb.title }} - ( {{ movieOmdb.Year }} )</h1>
-  <div class="movie-container">
+<div class="movie-container" *ngIf="movieTmdb && movieOmdb">
+  <div class="mat-display-2">{{ movieTmdb.title }} - ( {{ movieOmdb.Year }} )</div>
+  <div class="movie-detail">
     <img [src]="movieTmdb.backdrop_path | poster: 'original'" alt="" />
-    <app-videos *ngIf="videosTmdb.length > 0" [videos]="videosTmdb"></app-videos>
+    <app-accordion
+    [movieTmdb]="movieTmdb"
+    [movieOmdb]="movieOmdb"
+    [genres]="genres"
+  ></app-accordion>
   </div>
   <div>
-    <app-accordion
-      [movieTmdb]="movieTmdb"
-      [movieOmdb]="movieOmdb"
-      [genres]="genres"
-    ></app-accordion>
     <app-credits [cast]="castTmdb"></app-credits>
+    <app-videos *ngIf="videosTmdb.length > 0" [videos]="videosTmdb"></app-videos>
   </div>
 </div>

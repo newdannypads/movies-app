@@ -19,7 +19,7 @@ export class CreditsComponent implements OnInit {
 
   configSwiper(){
     this.config = {
-      slidesPerView: 5.3,
+      slidesPerView: 10.3,
       freeMode: true,
       spaceBetween: 15
     };

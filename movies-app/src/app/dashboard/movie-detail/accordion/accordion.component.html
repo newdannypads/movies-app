@@ -1,5 +1,5 @@
-<mat-accordion class="example-headers-align">
-  <mat-expansion-panel>
+<mat-accordion [multi]="true"  class="example-headers-align">
+  <mat-expansion-panel [expanded]="true">
     <mat-expansion-panel-header>
       <mat-panel-title>
         Synopsis
@@ -10,7 +10,7 @@
     </mat-expansion-panel-header>
     {{ movieTmdb?.overview }}
   </mat-expansion-panel>
-  <mat-expansion-panel>
+  <mat-expansion-panel [expanded]="true">
     <mat-expansion-panel-header>
       <mat-panel-title>
         Director
@@ -20,7 +20,7 @@
     </mat-expansion-panel-header>
     {{ movieOmdb?.Director }}
   </mat-expansion-panel>
-  <mat-expansion-panel>
+  <mat-expansion-panel [expanded]="true">
     <mat-expansion-panel-header>
       <mat-panel-title>
         Genres
@@ -32,7 +32,7 @@
       <mat-chip *ngFor="let genre of genres"> {{ genre.name }}</mat-chip>
     </mat-chip-list>
   </mat-expansion-panel>
-  <mat-expansion-panel>
+  <mat-expansion-panel [expanded]="true">
     <mat-expansion-panel-header>
       <mat-panel-title>
         Awards
@@ -45,5 +45,21 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
     <h3>{{ awards }} </h3>
+  </mat-expansion-panel>
+  <mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Rating
+      </mat-panel-title>
+      <mat-panel-description>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+      <ng-rating-bar
+      [value]="movieTmdb?.vote_average"
+      [ratingCount]="10"
+      styles="{  fontSize: '14px' }"
+      colorActive="yellow"
+      disabled="true"
+    ></ng-rating-bar>
   </mat-expansion-panel>
 </mat-accordion>

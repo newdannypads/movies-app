@@ -1,8 +1,10 @@
 <form [formGroup]="searchForm">
-  <mat-form-field appearance="outline">
-    <mat-label>Search</mat-label>
-    <input matInput placeholder="Search" formControlName="query" />
-    <mat-icon matSuffix>search</mat-icon>
-  </mat-form-field>
-  <button mat-dialog-close mat-raised-button color="primary" (click)="searchMovies()">Primary</button>
+  <div class="container">
+    <mat-form-field appearance="outline">
+      <mat-label>Search Movie</mat-label>
+      <input matInput placeholder="Search" formControlName="query" />
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+    <button mat-dialog-close mat-raised-button color="primary" (click)="searchMovies()">Search</button>
+  </div>
 </form>

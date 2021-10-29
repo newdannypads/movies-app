@@ -1,9 +1,6 @@
 <mat-toolbar>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <span>Movies</span>
-  <span class="example-spacer"></span>
+  <span class="pointer" [routerLink]="['/home']">Movies</span>
+  <span class="spacer"></span>
   <button mat-icon-button class="example-icon favorite-icon" (click)="openDialog()" aria-label="Example icon-button with heart icon">
     <mat-icon>search</mat-icon>
   </button>
