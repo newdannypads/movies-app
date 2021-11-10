@@ -13,6 +13,7 @@ import { MovieTmdb } from '../movie-tmdb.interface';
 import { OmdbService } from '../omdb.service';
 import { TmdbService } from '../tmdb.service';
 import { VideoItem } from '../movie-videos.interface';
+import { movieTmdbData } from './movie.data';
 
 @Component({
   selector: 'app-movie-detail',
@@ -25,7 +26,7 @@ export class MovieDetailComponent implements OnInit {
   movieTmdb: MovieTmdb;
   castTmdb: Cast[];
   videosTmdb: VideoItem[];
-
+  favorite: boolean = false;
   movieId: string;
   genres = [];
 
@@ -42,6 +43,8 @@ export class MovieDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.movieId = this.activatedRoute.snapshot.paramMap.get('id');
+    const { movieSelected }  = this.getFavorites();
+    this.favorite = movieSelected ? true : false;
     this.getMoviesDetails();
   }
 
@@ -71,6 +74,26 @@ export class MovieDetailComponent implements OnInit {
 
   getOmdbMovie(imdbId: string) {
     return this.omdbService.getOmdbMovie(imdbId);
+  }
+
+  setFavorite(){
+    const { selectedFavorites, movieSelected }  = this.getFavorites();
+
+    let newSelectedFavorites:{ id: string} [] = [];
+    if(movieSelected){
+       newSelectedFavorites = selectedFavorites.filter( favorite => favorite.id !==  this.movieId );
+    }else{
+      selectedFavorites.push({ id: this.movieId })
+      newSelectedFavorites = selectedFavorites;
+    }
+    localStorage.setItem('favorites', JSON.stringify(newSelectedFavorites));
+    this.favorite = !this.favorite;
+  }
+
+  private getFavorites() {
+    const selectedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    const movieSelected = selectedFavorites.find(favorite => favorite.id === this.movieId);
+    return { selectedFavorites, movieSelected };
   }
 
   private setData(movieTmdb: MovieTmdb, movieOmdb: MovieOmdb, videosTmdb: MovieVideos, castTmdb: Cast[]) {

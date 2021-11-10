@@ -13,6 +13,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [],
@@ -29,7 +30,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatToolbarModule,
     MatButtonModule,
     MatInputModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSidenavModule
   ],
   exports: [
     MatExpansionModule,
@@ -43,7 +45,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatToolbarModule,
     MatButtonModule,
     MatInputModule,
-    MatDialogModule
-  ]
+    MatDialogModule,
+    MatSidenavModule
+  ],
 })
-export class AppMaterialDependenciesModule { }
+export class AppMaterialDependenciesModule {}

@@ -1,0 +1,21 @@
+<mat-toolbar color="primary">
+  <button
+    mat-icon-button
+    class="example-icon"
+    (click)= "toggleSideBar()"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span class="pointer"[routerLink]="['/home']"> {{ title }} </span>
+  <mat-icon>navigate_next</mat-icon>
+  <span>{{ toolBarTitle | titlecase }}</span>
+  <span class="spacer"></span>
+  <button
+    mat-icon-button
+    class="example-icon favorite-icon"
+    (click)="openDialog()"
+    aria-label="search"
+  >
+    <mat-icon>search</mat-icon>
+  </button>
+</mat-toolbar>

@@ -25,6 +25,7 @@
     "ng-mocks": "^12.4.0",
     "ng-rating-bar": "^1.0.2",
     "ngx-useful-swiper": "^10.0.1",
+    "prettier": "^2.4.1",
     "rxjs": "~6.6.0",
     "swiper": "^6.5.7",
     "tslib": "^2.0.0",

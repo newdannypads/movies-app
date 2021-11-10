@@ -19,6 +19,9 @@ import { SanitizeUrlPipe } from './shared/pipes/sanitize-url.pipe';
 import { SearchDialogComponent } from './dashboard/search-dialog/search-dialog.component';
 import { CreditsComponent } from './dashboard/movie-detail/credits/credits.component';
 import { NgRatingBarModule } from 'ng-rating-bar';
+import { SidenavBarComponent } from './dashboard/sidenav-bar/sidenav-bar.component';
+import { FavoritesComponent } from './dashboard/favorites/favorites.component';
+import { ToolbarComponent } from './dashboard/toolbar/toolbar.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,10 @@ import { NgRatingBarModule } from 'ng-rating-bar';
     SanitizeUrlPipe,
     PosterPipe,
     SearchComponent,
-    SearchDialogComponent
+    SearchDialogComponent,
+    SidenavBarComponent,
+    FavoritesComponent,
+    ToolbarComponent
   ],
   imports: [
     BrowserModule,

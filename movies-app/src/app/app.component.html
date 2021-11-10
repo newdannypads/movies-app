@@ -1,9 +1,18 @@
-<mat-toolbar>
-  <span class="pointer" [routerLink]="['/home']">Movies</span>
-  <span class="spacer"></span>
-  <button mat-icon-button class="example-icon favorite-icon" (click)="openDialog()" aria-label="Example icon-button with heart icon">
-    <mat-icon>search</mat-icon>
-  </button>
-</mat-toolbar>
-<router-outlet></router-outlet>
-<footer>Made with love</footer>
+<div class="content">
+  <app-toolbar [title]="title"(sidenavEvent)="sidenavOpen = $event"></app-toolbar>
+  <app-sidenav-bar
+    [sidenavConfig]="sidenavConfig"
+    [open]="sidenavOpen"
+    [mobile]="mobile$ | async"
+    [mode]="'side'"
+  >
+    <div class="content-container">
+      <router-outlet></router-outlet>
+    </div>
+    <footer>
+      <mat-toolbar color="primary">
+        Made with love
+      </mat-toolbar>
+    </footer>
+  </app-sidenav-bar>
+</div>

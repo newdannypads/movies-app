@@ -1,21 +1,18 @@
 import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { SearchComponent } from './dashboard/search/search.component';
-import { SearchDialogComponent } from './dashboard/search-dialog/search-dialog.component';
+import { Observable } from 'rxjs';
+import { sidenavRoutes } from './app-routing.module';
+import { SidenavBar } from './dashboard/sidenav-bar/sidenav-bar.interface';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'movies-app';
+  title = 'Movies';
+  mobile$: Observable<boolean>;
+  sidenavConfig: SidenavBar[] = sidenavRoutes;
+  sidenavOpen: boolean = false;
 
-  constructor(public dialog: MatDialog) {}
-
-  openDialog() {
-    this.dialog.open(SearchDialogComponent,{
-      position: { right: '3rem', top: '3rem'}
-    });
-  }
+  constructor() {}
 }
