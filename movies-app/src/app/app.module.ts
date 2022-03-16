@@ -12,7 +12,7 @@ import { AccordionComponent } from './dashboard/movie-detail/accordion/accordion
 import { MovieDetailComponent } from './dashboard/movie-detail/movie-detail.component';
 import { VideosComponent } from './dashboard/movie-detail/videos/videos.component';
 import { SearchComponent } from './dashboard/search/search.component';
-import { ThumbnailComponent } from './dashboard/thumbnail/thumbnail.component';
+import { SliderComponent } from './shared/components/slider/slider.component';
 import { AppMaterialDependenciesModule } from './shared/app-material-dependencies.module';
 import { PosterPipe } from './shared/pipes/poster.pipe';
 import { SanitizeUrlPipe } from './shared/pipes/sanitize-url.pipe';
@@ -27,7 +27,7 @@ import { ToolbarComponent } from './dashboard/toolbar/toolbar.component';
   declarations: [
     AppComponent,
     DashboardComponent,
-    ThumbnailComponent,
+    SliderComponent,
     MovieDetailComponent,
     AccordionComponent,
     VideosComponent,

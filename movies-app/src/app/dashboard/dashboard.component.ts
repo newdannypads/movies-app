@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { TmdbService } from './tmdb.service';
-import { Movie } from './movies-trending.interface';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { SwiperOptions } from 'swiper';
+import { Genre } from './movie-tmdb.interface';
+import { Movie } from './movies-trending.interface';
+import { TmdbService } from './tmdb.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,10 +12,10 @@ import { SwiperOptions } from 'swiper';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  movies: Movie[] = [];
-  genres = [];
-  imageHeight: string = '75vh';
+  movies$: Observable<Movie[]>;
+  genres$: Observable<Genre[]>;
   config: SwiperOptions;
+  imageHeight: string = '75vh';
 
   constructor(private tmdbService: TmdbService) {}
 
@@ -23,15 +26,11 @@ export class DashboardComponent implements OnInit {
   }
 
   getTrendingMovies() {
-    this.tmdbService.getTmdbNowPlayingMovies().subscribe((data) => {
-      this.movies = data.results;
-    });
+    this.movies$ = this.tmdbService.getTmdbNowPlayingMovies().pipe(map(({ results }) => results));
   }
 
   getMoviesGenre() {
-    this.tmdbService.getTmdbGenreMovies().subscribe((data) => {
-      this.genres = data.genres;
-    });
+    this.genres$ = this.tmdbService.getTmdbGenreMovies().pipe(map(({ genres }) => genres));
   }
 
   configSwiper() {
@@ -39,10 +38,10 @@ export class DashboardComponent implements OnInit {
       loop: true,
       slidesPerView: 3,
       spaceBetween: 30,
-      // pagination: {
-      //   el: '.swiper-pagination',
-      //   clickable: true,
-      // },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
       navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',

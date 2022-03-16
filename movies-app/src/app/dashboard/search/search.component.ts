@@ -3,7 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Movie } from '../movies-trending.interface';
 import { TmdbService } from '../tmdb.service';
 import { SwiperOptions } from 'swiper';
-
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search',
@@ -11,10 +12,9 @@ import { SwiperOptions } from 'swiper';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
-
   query: string;
-  movies: Movie[];
-  imageHeight: string = '40vh'
+  movies$: Observable<Movie[]>;
+  imageHeight: string = '40vh';
   config: SwiperOptions;
 
   constructor(private activatedRoute: ActivatedRoute, private tmdbService: TmdbService) {}
@@ -25,18 +25,16 @@ export class SearchComponent implements OnInit {
     this.configSwiper();
   }
 
-  searchMovies(){
-    this.tmdbService.searchMovie(this.query)
-    .subscribe((data) => this.movies = data.results );
+  searchMovies() {
+    this.movies$ = this.tmdbService.searchMovie(this.query).pipe(map(({ results }) => results));
   }
 
-  configSwiper(){
+  configSwiper() {
     this.config = {
       slidesPerView: 3,
       spaceBetween: 30,
       slidesPerColumn: 2,
-      slidesPerColumnFill: 'row'
+      slidesPerColumnFill: 'row',
     };
   }
-
 }

@@ -8,7 +8,7 @@
   </button>
   <span class="pointer"[routerLink]="['/home']"> {{ title }} </span>
   <mat-icon>navigate_next</mat-icon>
-  <span>{{ toolBarTitle | titlecase }}</span>
+  <span data-test-selector="toolbar-title">{{ toolbarTitle$ | async | titlecase }}</span>
   <span class="spacer"></span>
   <button
     mat-icon-button

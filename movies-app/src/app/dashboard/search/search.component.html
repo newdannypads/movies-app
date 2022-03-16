@@ -1,4 +1,4 @@
 <div class="thumbnail-container">
-  <app-thumbnail [movies]="movies" [imageHeight]="'40vh'" [config]="config"></app-thumbnail>
+  <app-slider [movies]="movies$ | async" [imageHeight]="'40vh'" [config]="config"></app-slider>
 </div>
 

@@ -1,13 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { SwiperOptions } from 'swiper';
-import { Movie } from '../movies-trending.interface';
+import { Movie } from '../../../dashboard/movies-trending.interface';
 
 @Component({
-  selector: 'app-thumbnail',
-  templateUrl: './thumbnail.component.html',
-  styleUrls: ['./thumbnail.component.scss']
+  selector: 'app-slider',
+  templateUrl: './slider.component.html',
+  styleUrls: ['./slider.component.scss']
 })
-export class ThumbnailComponent implements OnInit {
+export class SliderComponent implements OnInit {
 
   @Input() movies: Movie[] = [];
   @Input() imageHeight: string;

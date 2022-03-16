@@ -1,39 +1,34 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NavigationEnd, Router } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { AppMaterialDependenciesModule } from '../../shared/app-material-dependencies.module';
 import { SearchDialogComponent } from '../search-dialog/search-dialog.component';
-
 import { ToolbarComponent } from './toolbar.component';
 
 describe('ToolbarComponent', () => {
   let component: ToolbarComponent;
   let fixture: ComponentFixture<ToolbarComponent>;
-  let router: Router;
+
+  const MockRouter = {
+    events: of(new NavigationEnd(0, '/favorites', '')),
+    navigate: jest.fn(),
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ToolbarComponent, SearchDialogComponent],
-      imports: [
-        RouterTestingModule,
-        AppMaterialDependenciesModule,
-        NoopAnimationsModule,
-        ReactiveFormsModule,
+      imports: [AppMaterialDependenciesModule, NoopAnimationsModule, ReactiveFormsModule],
+      providers: [
+        {
+          provide: Router,
+          useValue: MockRouter,
+        },
       ],
-      // providers: [
-      //   {
-      //     provide: Router,
-      //     useValue: {
-      //       url: 'business/create',
-      //       events: of(new NavigationEnd(0, 'http://localhost:4200/business/create','')),
-      //       navigate: jest.fn()
-      //     }
-      //   }
-      // ],
+      schemas: [NO_ERRORS_SCHEMA],
     })
       .overrideModule(BrowserModule, {
         set: { entryComponents: [SearchDialogComponent] },
@@ -59,25 +54,10 @@ describe('ToolbarComponent', () => {
     expect(component['dialog'].open).toHaveBeenCalled();
   });
 
-  xit('should update the title of the toolbar', () => {
-    // jest
-    //   .spyOn<any, any>(component['router'], 'events')
-    //   .mockReturnValue(
-    //     of(new NavigationEnd(0, '/pdp/project-details/4/edit', 'pdp/project-details/4/edit'))
-    //   );
+  it('should update the title of the toolbar', () => {
+    const spanRoute = fixture.debugElement.query(By.css(`[data-test-selector='toolbar-title']`));
 
-    // component['verifyUrl']();
-
-    // expect(component.toolBarTitle).toBe('favorites');
-
-    //const route = new NavigationEnd(0, '/pdp/project-details/4/edit', 'pdp/project-details/4/edit');
-
-    // jest
-    //   .spyOn<any, any>(TestBed.inject(Router), 'events')
-    //   .mockReturnValue(of({ url: '/pdp/project-details/4/edit' }));
-    component['verifyUrl']();
-
-    expect(component.toolBarTitle).toBe('favorites');
+    expect(spanRoute.nativeElement.innerHTML).toBe('Favorites');
   });
 
   it('should emit sidenavEvent with false', () => {

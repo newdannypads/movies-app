@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { forkJoin } from 'rxjs';
+import { forkJoin, Observable } from 'rxjs';
 import { SwiperOptions } from 'swiper';
 import { MovieTmdb } from '../movie-tmdb.interface';
 import { Movie } from '../movies-trending.interface';
 import { TmdbService } from '../tmdb.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-favorites',
@@ -13,7 +14,7 @@ import { TmdbService } from '../tmdb.service';
 export class FavoritesComponent implements OnInit {
   constructor(private tmdbService: TmdbService) {}
 
-  favoritesList: Movie[] = [];
+  favoritesList$: Observable<Movie[]>;
   config: SwiperOptions;
   imageHeight: string = '75vh';
 
@@ -42,13 +43,17 @@ export class FavoritesComponent implements OnInit {
       observable['request' + i] = this.tmdbService.getTmdbMovie(id);
     });
 
-    forkJoin(observable).subscribe(
-      (result: MovieTmdb) => {
-        Object.keys(result).forEach(key => {
-          this.favoritesList.push(this.getMovieData(result, key));
-        });
-      }
+    this.favoritesList$ = forkJoin(observable).pipe(
+      map((result: MovieTmdb) => this.addFavorites(result))
     );
+  }
+
+  private addFavorites(result: MovieTmdb) {
+    let favoritesList: Movie[] = [];
+    Object.keys(result).forEach(key => {
+      favoritesList.push(this.getMovieData(result, key));
+    });
+    return favoritesList;
   }
 
   private getMovieData(result: MovieTmdb, key: string): Movie {

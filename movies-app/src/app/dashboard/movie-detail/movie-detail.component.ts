@@ -1,19 +1,14 @@
-import { MovieVideos } from './../movie-videos.interface';
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component, OnInit
-} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { combineLatest } from 'rxjs';
+import { combineLatest, Subject } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { Cast } from '../credits.interface';
 import { MovieOmdb } from '../movie-omdb.interface';
 import { MovieTmdb } from '../movie-tmdb.interface';
+import { VideoItem } from '../movie-videos.interface';
 import { OmdbService } from '../omdb.service';
 import { TmdbService } from '../tmdb.service';
-import { VideoItem } from '../movie-videos.interface';
-import { movieTmdbData } from './movie.data';
+import { MovieVideos } from './../movie-videos.interface';
 
 @Component({
   selector: 'app-movie-detail',
@@ -21,11 +16,14 @@ import { movieTmdbData } from './movie.data';
   styleUrls: ['./movie-detail.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MovieDetailComponent implements OnInit {
+export class MovieDetailComponent implements OnInit, OnDestroy {
   movieOmdb: MovieOmdb;
   movieTmdb: MovieTmdb;
   castTmdb: Cast[];
   videosTmdb: VideoItem[];
+
+  stopSubscribe$: Subject<void> = new Subject<void>();
+
   favorite: boolean = false;
   movieId: string;
   genres = [];
@@ -43,24 +41,29 @@ export class MovieDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.movieId = this.activatedRoute.snapshot.paramMap.get('id');
-    const { movieSelected }  = this.getFavorites();
+    const { movieSelected } = this.getFavorites();
     this.favorite = movieSelected ? true : false;
     this.getMoviesDetails();
+  }
+
+  ngOnDestroy(): void {
+    this.stopSubscribe$.next();
+    this.stopSubscribe$.complete();
   }
 
   getMoviesDetails() {
     combineLatest([
       this.tmdbService.getTmdbMovie(this.movieId),
       this.tmdbService.getCastMovie(this.movieId),
-      this.tmdbService.getTmdbVideoMovies(this.movieId)
+      this.tmdbService.getTmdbVideoMovies(this.movieId),
     ])
       .pipe(
-        switchMap((data) =>
-          this.getOmdbMovie(data[0].imdb_id).pipe(
+        switchMap(([movieTmdb, castTmdb, videosTmdb]) =>
+          this.getOmdbMovie(movieTmdb.imdb_id).pipe(
             map((movieOmdb: MovieOmdb) => ({
-              movieTmdb: data[0],
-              castTmdb: data[1],
-              videosTmdb: data[2],
+              movieTmdb,
+              castTmdb,
+              videosTmdb,
               movieOmdb,
             }))
           )
@@ -76,14 +79,14 @@ export class MovieDetailComponent implements OnInit {
     return this.omdbService.getOmdbMovie(imdbId);
   }
 
-  setFavorite(){
-    const { selectedFavorites, movieSelected }  = this.getFavorites();
+  setFavorite() {
+    const { selectedFavorites, movieSelected } = this.getFavorites();
 
-    let newSelectedFavorites:{ id: string} [] = [];
-    if(movieSelected){
-       newSelectedFavorites = selectedFavorites.filter( favorite => favorite.id !==  this.movieId );
-    }else{
-      selectedFavorites.push({ id: this.movieId })
+    let newSelectedFavorites: { id: string }[] = [];
+    if (movieSelected) {
+      newSelectedFavorites = selectedFavorites.filter(favorite => favorite.id !== this.movieId);
+    } else {
+      selectedFavorites.push({ id: this.movieId });
       newSelectedFavorites = selectedFavorites;
     }
     localStorage.setItem('favorites', JSON.stringify(newSelectedFavorites));
@@ -101,6 +104,6 @@ export class MovieDetailComponent implements OnInit {
     this.movieOmdb = movieOmdb;
     this.genres = movieTmdb.genres;
     this.videosTmdb = videosTmdb.results;
-    this.castTmdb = castTmdb.filter((actor) => actor.profile_path !== null);
+    this.castTmdb = castTmdb.filter(actor => actor.profile_path !== null);
   }
 }

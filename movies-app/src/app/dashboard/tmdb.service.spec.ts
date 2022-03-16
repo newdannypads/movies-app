@@ -9,8 +9,6 @@ import * as popularSeries from '../shared/tests/data/popular-series-data.testdat
 import * as movieCast from '../shared/tests/data/movie-cast.json';
 import { environment } from './../../environments/environment';
 import { TmdbService } from './tmdb.service';
-import { Movie } from './movies-trending.interface';
-
 
 describe('TmdbService', () => {
   let service: TmdbService;

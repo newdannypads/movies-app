@@ -1,13 +1,5 @@
- <!-- <mat-form-field appearance="fill">
- <mat-label>Select the genre</mat-label>
-  <mat-select>
-    <mat-option *ngFor="let genre of genres" [value]="genre.id">
-      {{ genre.name }}
-    </mat-option>
-  </mat-select>
-</mat-form-field>-->
-<div *ngIf="movies?.length > 0">
-  <app-thumbnail [movies]="movies" [imageHeight]="imageHeight" [config]="config"></app-thumbnail>
+<div *ngIf="(movies$ | async)?.length > 0">
+  <app-slider [movies]="movies$ | async" [imageHeight]="imageHeight" [config]="config"></app-slider>
 </div>
 
 
